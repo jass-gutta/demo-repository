@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch
-        if: startsWith(github.ref, 'refs/heads/release/') == false
+        if: startsWith(github.ref, 'refs/heads/release/*') == false
         run: |
           echo "ERROR: You can only merge to main from release branches."
           exit 1
