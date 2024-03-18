@@ -7,9 +7,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Check branch
         run: |
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
@@ -17,5 +14,7 @@ jobs:
             echo "ERROR: You can only deploy from release branches."
             exit 1
           fi
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       # Add your deployment steps here
