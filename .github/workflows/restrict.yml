@@ -2,18 +2,20 @@ name: Deploy to Staging
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to deploy'
-        required: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Check branch
         run: |
-          if [[ "${{ github.event.inputs.branch }}" != "release/"* ]]; then
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          if [[ $BRANCH_NAME != "release/"* ]]; then
             echo "ERROR: You can only deploy from release branches."
             exit 1
           fi
+
+      # Add your deployment steps here
